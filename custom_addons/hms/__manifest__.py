@@ -1,7 +1,7 @@
 {
     'name': 'hms',
     'summary': 'Hospitals Management System',
-    'author': 'Yousef-Abdelati',
+    'author': 'fatma-mosaad',
     'category': 'Services',
     'version': '0.1',
     'depends': ['base','crm'],
