@@ -1,26 +1,22 @@
-# -*- coding: utf-8 -*-
 {
-    "name": "Hospital Management System",
-    "version": "1.0",
-    "summary": "Manage hospital patients",
-    "description": """
-This module manages patient records in a hospital.
-    """,
-    "author": "Fatma",
-    "website": "https://www.yourcompany.com",
-    "category": "Healthcare",
-    "depends": ["base"],
-   "data": [
-    "security/ir.model.access.csv",
-    "views/hms_actions.xml",
-    "views/menu.xml",               
-    "views/patient_views.xml",
-    "views/department_views.xml",
-    "views/doctor_views.xml",
-],
+    'name': 'hms',
+    'summary': 'Hospitals Management System',
+    'author': 'Yousef-Abdelati',
+    'category': 'Services',
+    'version': '0.1',
+    'depends': ['base','crm'],
+    'data': [
+        'security/hms_security.xml',
+        'security/ir.model.access.csv',
+        'reports/report_action.xml',
+        'views/patient_views.xml',
+        'views/department_views.xml',
+        'views/doctor_views.xml',
+        'views/patient_customer_views.xml',
+        'reports/patient_report.xml',
 
-    "demo": [],
-    "installable": True,
-    "application": True,
-    "auto_install": False,
+    ],
+    'installable': True,
+    'application': True,
 }
+

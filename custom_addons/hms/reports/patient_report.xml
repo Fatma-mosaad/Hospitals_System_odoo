@@ -1,0 +1,59 @@
+<odoo>
+    <template id="report_patient_status">
+        <t t-call="web.external_layout">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-family:Arial; font-size:13px; color:#000;">
+
+                        <h2 style="margin-bottom:20px;">Patient Status Report</h2>
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div style="width: 60%;">
+                                <p><strong>Name:</strong> <span t-esc="doc.first_name"/> <span t-esc="doc.last_name"/></p>
+                                <p><strong>Created By:</strong> <span t-esc="doc.user_id.name"/></p>
+                                <p><strong>Age:</strong> <span t-esc="doc.age"/></p>
+                                <p><strong>Department:</strong> <span t-esc="doc.department_id.name"/></p>
+                                <p><strong>Doctors:</strong>
+                                    <t t-foreach="doc.doctor_ids" t-as="doctor">
+                                        <span t-esc="doctor.first_name"/> <span t-esc="doctor.last_name"/><t t-if="not loop.last">, </t>
+                                    </t>
+                                </p>
+                            </div>
+
+                            <div style="width: 35%; text-align: right;">
+                                <div t-if="doc.image" style="margin-bottom: 10px;">
+                                    <img t-att-src="'data:image/png;base64,%s' % doc.image.decode('utf-8')" style="width: 100px; height: 100px; object-fit: cover;"/>
+                                </div>
+                                <p><strong>Birth date:</strong> <span t-esc="doc.birth_date"/></p>
+                                <p><strong>PCR:</strong> <span t-esc="doc.pcr"/></p>
+                                <p><strong>Blood Type:</strong> <span t-esc="doc.blood_type"/></p>
+                                <p><strong>Email:</strong> <span t-esc="doc.email"/></p>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 30px; margin-bottom: 10px;">Log History</h3>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 6px; border: 1px solid #000;">User</th>
+                                    <th style="padding: 6px; border: 1px solid #000;">Date</th>
+                                    <th style="padding: 6px; border: 1px solid #000;">Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.message_ids.filtered(lambda m: m.message_type != 'notification')" t-as="msg">
+                                    <tr>
+                                        <td style="padding: 6px; border: 1px solid #000;"><span t-esc="msg.author_id.name"/></td>
+                                        <td style="padding: 6px; border: 1px solid #000;"><span t-esc="msg.date"/></td>
+                                        <td style="padding: 6px; border: 1px solid #000;"><span t-raw="msg.body"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+</odoo>

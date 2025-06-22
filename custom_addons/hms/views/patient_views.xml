@@ -1,37 +1,57 @@
 <odoo>
-    <record id="view_patient_form" model="ir.ui.view">
+    <record id="view_form_hms_patient" model="ir.ui.view">
         <field name="name">hms.patient.form</field>
         <field name="model">hms.patient</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Patient">
+            <header>
+                <button name="%(action_patient_report)d" string="Print Patient Report" type="action" class="btn btn-primary"/>
+            </header>
+
                 <sheet>
                     <group>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="birth_date"/>
-                        <field name="age"/>
-                        <field name="department_id" domain="[('is_opened', '=', True)]"/>
-                        <field name="cr_ratio"/>
-                        <field name="pcr"/>
-                        <field name="blood_type"/>
-                        <field name="doctors_ids" widget="many2many_tags"/>
-                        <field name="history"/>
-                        <field name="image"/>
+                        <group>
+                            <field name="first_name" required="1"/>
+                            <field name="last_name" required="1"/>
+                            <field name="user_id" readonly="1"/> 
+                            <field name="email" required="1"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                            <field name="state"/>
+                            <field name="gender"/> 
+                            <field name="blood_type"/>
+                        </group>
+                        <group>
+                            <field name="department_id" domain="[('is_opened', '=', True)]"/>
+                            <field name="capacity" readonly="1"/>
+                            <field name="doctor_ids" widget="many2many_tags" groups="hms.group_hms_manager"/>
+                            <field name="pcr"/>
+                            <field name="cr_ratio"/>
+                        </group>
+                    </group>
+
+                    <group>
                         <field name="address"/>
+                        <field name="history"/>
+                        <field name="image" widget="image" class="oe_avatar"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_patient_tree" model="ir.ui.view">
+    <record id="view_tree_hms_patient" model="ir.ui.view">
         <field name="name">hms.patient.tree</field>
         <field name="model">hms.patient</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="first_name"/>
                 <field name="last_name"/>
+                <field name="user_id"/> 
+                <field name="birth_date"/>
                 <field name="age"/>
+                <field name="state"/>
+                <field name="gender"/> 
                 <field name="department_id"/>
             </tree>
         </field>
@@ -44,7 +64,5 @@
     </record>
 
     <menuitem id="menu_hms_root" name="Hospital Management"/>
-    <menuitem id="menu_hms_patient" name="Patients" parent="menu_hms_root"/>
-    <menuitem id="menu_hms_patient_action" name="All Patients"
-              parent="menu_hms_patient" action="action_hms_patient"/>
+    <menuitem id="menu_hms_patients" name="Patients" parent="menu_hms_root" action="action_hms_patient"/>
 </odoo>

@@ -1,32 +1,21 @@
 <odoo>
-    <!-- Form View -->
-    <record id="view_doctor_form" model="ir.ui.view">
+    <record id="view_form_hms_doctor" model="ir.ui.view">
         <field name="name">hms.doctor.form</field>
         <field name="model">hms.doctor</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Doctor">
                 <sheet>
                     <group>
                         <field name="first_name"/>
                         <field name="last_name"/>
-                        <field name="image"/>
+                        <field name="image" widget="image" class="oe_avatar"/>
                     </group>
-                    <notebook>
-                        <page string="Departments">
-                            <field name="department_ids" widget="many2many_tags">
-                                <tree>
-                                    <field name="name"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Tree View -->
-    <record id="view_doctor_tree" model="ir.ui.view">
+    <record id="view_tree_hms_doctor" model="ir.ui.view">
         <field name="name">hms.doctor.tree</field>
         <field name="model">hms.doctor</field>
         <field name="arch" type="xml">
@@ -37,16 +26,15 @@
         </field>
     </record>
 
-    <!-- Action -->
     <record id="action_hms_doctor" model="ir.actions.act_window">
         <field name="name">Doctors</field>
         <field name="res_model">hms.doctor</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Menu Item -->
-    <menuitem id="menu_hms_doctor"
+    <menuitem id="menu_hms_doctors"
               name="Doctors"
               parent="menu_hms_root"
-              action="action_hms_doctor"/>
+              action="action_hms_doctor"
+              groups="hms.group_hms_manager"/>
 </odoo>
